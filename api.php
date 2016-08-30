@@ -1619,7 +1619,7 @@ class PHP_CRUD_API {
 			$table_list = array($table['name']);
 			$table_fields = $this->findFields($table_list,false,$database);
 			$table_names = array_map(function($v){ return $v['name'];},$tables);
-			
+
 			if ($extensions) {
 				$result = $this->db->query($this->db->getSql('reflect_belongs_to'),array($table_list[0],$table_names,$database,$database));
 				while ($row = $this->db->fetchRow($result)) {
@@ -1634,7 +1634,7 @@ class PHP_CRUD_API {
 					$table_fields[$table['name']][$primaryKey]->primaryKey = true;
 				}
 			}
-			
+
 			foreach (array('root_actions','id_actions') as $path) {
 				foreach ($table[$path] as $i=>$action) {
 					$table_list = array($table['name']);
@@ -1925,21 +1925,21 @@ class PHP_CRUD_API {
 }
 
 class PHP_API_AUTH {
-	
+
 	public function __construct($config) {
 		extract($config);
-		
+
 		$verb = isset($verb)?$verb:null;
 		$path = isset($path)?$path:null;
 		$username = isset($username)?$username:null;
 		$password = isset($password)?$password:null;
 		$token = isset($token)?$token:null;
 		$authenticator = isset($authenticator)?$authenticator:null;
-		
+
 		$method = isset($method)?$method:null;
 		$request = isset($request)?$request:null;
 		$post = isset($post)?$post:null;
-		
+
 		$time = isset($time)?$time:null;
 		$leeway = isset($leeway)?$leeway:null;
 		$ttl = isset($ttl)?$ttl:null;
@@ -1962,7 +1962,7 @@ class PHP_API_AUTH {
 		if (!$token) {
 			$token = 'token';
 		}
-		
+
 		if (!$method) {
 			$method = $_SERVER['REQUEST_METHOD'];
 		}
@@ -1975,7 +1975,7 @@ class PHP_API_AUTH {
 		if (!$post) {
 			$post = 'php://input';
 		}
-		
+
 		if (!$time) {
 			$time = time();
 		}
@@ -1990,7 +1990,7 @@ class PHP_API_AUTH {
 		}
 
 		$request = trim($request,'/');
-		
+
 		$this->settings = compact('verb', 'path', 'username', 'password', 'token', 'authenticator', 'method', 'request', 'post', 'time', 'leeway', 'ttl', 'algorithm', 'secret');
 	}
 
@@ -2051,7 +2051,7 @@ class PHP_API_AUTH {
 
 	public function executeCommand() {
 		extract($this->settings);
-		$no_session = $authenticator && $secret; 
+		$no_session = $authenticator && $secret;
 		if (!$no_session) {
 			ini_set('session.cookie_httponly', 1);
 			session_start();
@@ -2097,46 +2097,5 @@ class PHP_API_AUTH {
 // $auth->executeCommand();
 // if (empty($_SESSION['user'])) exit(403);
 
-// uncomment the lines below when running in stand-alone mode:
-
-// $api = new PHP_CRUD_API(array(
-// 	'dbengine'=>'MySQL',
-// 	'hostname'=>'localhost',
-// 	'username'=>'',
-// 	'password'=>'',
-// 	'database'=>'',
-// 	'charset'=>'utf8'
-// ));
-// $api->executeCommand();
-
-// For Microsoft SQL Server 2012 use:
-
-// $api = new PHP_CRUD_API(array(
-// 	'dbengine'=>'SQLServer',
-// 	'hostname'=>'(local)',
-// 	'username'=>'',
-// 	'password'=>'',
-// 	'database'=>'xxx',
-// 	'charset'=>'UTF-8'
-// ));
-// $api->executeCommand();
-
-// For PostgreSQL 9 use:
-
-// $api = new PHP_CRUD_API(array(
-// 	'dbengine'=>'PostgreSQL',
-// 	'hostname'=>'localhost',
-// 	'username'=>'xxx',
-// 	'password'=>'xxx',
-// 	'database'=>'xxx',
-// 	'charset'=>'UTF8'
-// ));
-// $api->executeCommand();
-
-// For SQLite 3 use:
-
-// $api = new PHP_CRUD_API(array(
-// 	'dbengine'=>'SQLite',
-// 	'database'=>'data/blog.db',
-// ));
-// $api->executeCommand();
+include_once('mysqlconfig.inc');
+?>

@@ -5,7 +5,7 @@
     <ul class="sidebar-menu">
         <li class="header">NAVIGATION</li>
         <!-- Optionally, you can add icons to the links -->
-        <li><a href="./budgets_overview.php"><i class="fa fa-link"></i> <span>Budgets Overview</span></a></li>
+        <li><a href="./budgets.php"><i class="fa fa-link"></i> <span>Budgets Overview</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Bookings</span>
             <span class="pull-right-container">
